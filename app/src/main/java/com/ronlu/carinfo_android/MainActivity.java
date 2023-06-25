@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.ronlu.carinfo_android.adepters.MyAdapter;
+import com.ronlu.carinfo_android.models.Car;
+import com.ronlu.carinfo_android.requests.CarRepository;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,15 +50,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = String.valueOf(main_SV_searchView.getQuery());
-                if(value.isEmpty())
+                if(main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.ALL){
+                    retrieveAllCars();
+                }else if(value.isEmpty()){
                     Toast.makeText(MainActivity.this, "Please enter value to the search bar!", Toast.LENGTH_SHORT).show();
-                else {
+                }else{
                     if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.MANU)
                         retrieveCarByManufacture(value);
                     else if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.COLOR)
                         retrieveCarByColor(value);
-                    else if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.ALL)
-                        retrieveAllCars();
                     else if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.LP)
                         retrieveCarByLicensePlate(value);
                 }

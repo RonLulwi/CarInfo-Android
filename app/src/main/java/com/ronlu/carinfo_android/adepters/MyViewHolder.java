@@ -1,4 +1,4 @@
-package com.ronlu.carinfo_android;
+package com.ronlu.carinfo_android.adepters;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ronlu.carinfo_android.R;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
 

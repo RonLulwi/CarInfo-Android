@@ -1,4 +1,4 @@
-package com.ronlu.carinfo_android;
+package com.ronlu.carinfo_android.models;
 
 public class Car {
 

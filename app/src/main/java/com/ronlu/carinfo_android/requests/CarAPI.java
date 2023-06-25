@@ -1,4 +1,6 @@
-package com.ronlu.carinfo_android;
+package com.ronlu.carinfo_android.requests;
+
+import com.ronlu.carinfo_android.models.Car;
 
 import java.util.List;
 

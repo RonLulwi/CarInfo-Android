@@ -1,4 +1,4 @@
-package com.ronlu.carinfo_android;
+package com.ronlu.carinfo_android.adepters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.request.RequestOptions;
+import com.ronlu.carinfo_android.R;
+import com.ronlu.carinfo_android.models.Car;
 
 import java.util.ArrayList;
 import java.util.List;
