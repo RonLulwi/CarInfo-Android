@@ -17,7 +17,7 @@ import com.ronlu.common.requests.CarRepository;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CarRepository.CallBack_car, CarRepository.CallBack_cars {
     private SearchView main_SV_searchView;
     private AppCompatButton main_BTN_search;
     private RadioGroup main_RGP_radioGroup;
@@ -51,69 +51,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = String.valueOf(main_SV_searchView.getQuery());
-                if(main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.ALL){
-                    retrieveAllCars();
+                int TargetId = main_RGP_radioGroup.getCheckedRadioButtonId();
+
+                if(TargetId == R.id.ALL){
+                    mRepo.getCars(MainActivity.this);
                 }else if(value.isEmpty()){
                     Toast.makeText(MainActivity.this, "Please enter value to the search bar!", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.MANU)
-                        retrieveCarByManufacture(value);
-                    else if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.COLOR)
-                        retrieveCarByColor(value);
-                    else if (main_RGP_radioGroup.getCheckedRadioButtonId() == R.id.LP)
-                        retrieveCarByLicensePlate(value);
+                    if (TargetId == R.id.MANU)
+                        mRepo.getCarsByManufacture(value, MainActivity.this);
+                    else if (TargetId == R.id.COLOR)
+                        mRepo.getCarsByColor(value, MainActivity.this);
+                    else if (TargetId == R.id.LP)
+                        mRepo.getCar(value, MainActivity.this);
                 }
             }
         });
 
     }
-
-    private void retrieveCarByLicensePlate(String value) {
-
-        mRepo.getCar(value, new CarRepository.CallBack_car() {
-            @Override
-            public void OnReturnedCar(Car car) {
-
-            }
-        });
-
-        mRepo.getCar(value, new CarRepository.CallBack_car() {
-            @Override
-            public void OnReturnedCar(Car car) {
-                ArrayList<Car> data = new ArrayList<>();
-                data.add(car);
-                mAdapter.setCarList(data);
-            }
-        });
-    }
-
-    private void retrieveAllCars() {
-        mRepo.getCars(new CarRepository.CallBack_cars() {
-            @Override
-            public void OnReturnedCars(ArrayList<Car> cars) {
-                mAdapter.setCarList(cars);
-            }
-        });
-    }
-
-    private void retrieveCarByColor(String value) {
-        mRepo.getCarsByColor(value, new CarRepository.CallBack_cars() {
-            @Override
-            public void OnReturnedCars(ArrayList<Car> cars) {
-                mAdapter.setCarList(cars);
-            }
-        });
-    }
-
-    private void retrieveCarByManufacture(String value) {
-        mRepo.getCarsByManufacture(value, new CarRepository.CallBack_cars() {
-            @Override
-            public void OnReturnedCars(ArrayList<Car> cars) {
-                mAdapter.setCarList(cars);
-            }
-        });
-    }
-
     private void initRecyclerViewAdapter() {
         mAdapter = new MyAdapter(this);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -122,4 +77,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void OnReturnedCar(Car car) {
+        ArrayList<Car> data = new ArrayList<>();
+        data.add(car);
+        mAdapter.setCarList(data);
+    }
+
+    @Override
+    public void OnReturnedCars(ArrayList<Car> cars) {
+        mAdapter.setCarList(cars);
+    }
 }
