@@ -1,4 +1,4 @@
-package com.ronlu.carinfo_android.requests;
+package com.ronlu.common.requests;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -7,7 +7,7 @@ public class RetrofitClient {
 
 
     private static CarAPI instance;
-    private static final String BASE_URL = "Your HTTP Base URL";
+    private static final String BASE_URL = "http://10.100.102.17:8081/cars/v1/";
 
     public static CarAPI getInstance(){
         if(instance == null)

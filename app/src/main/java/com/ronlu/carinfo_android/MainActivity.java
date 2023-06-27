@@ -5,14 +5,15 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.ronlu.carinfo_android.adepters.MyAdapter;
-import com.ronlu.carinfo_android.models.Car;
-import com.ronlu.carinfo_android.requests.CarRepository;
+import com.ronlu.common.Car;
+import com.ronlu.common.requests.CarRepository;
 
 import java.util.ArrayList;
 
@@ -68,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void retrieveCarByLicensePlate(String value) {
+
+        mRepo.getCar(value, new CarRepository.CallBack_car() {
+            @Override
+            public void OnReturnedCar(Car car) {
+
+            }
+        });
+
         mRepo.getCar(value, new CarRepository.CallBack_car() {
             @Override
             public void OnReturnedCar(Car car) {
@@ -111,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
-
 
 
 }

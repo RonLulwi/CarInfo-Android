@@ -1,10 +1,8 @@
-package com.ronlu.carinfo_android.requests;
+package com.ronlu.common.requests;
 
-import com.ronlu.carinfo_android.models.Car;
-
+import com.ronlu.common.Car;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -13,8 +11,6 @@ public class CarRepository {
 
     private static CarRepository instance;
     private CarAPI service;
-    Car car;
-    ArrayList<Car> cars = new ArrayList<>();
     private CallBack_cars callBack_cars;
     private CallBack_car callBack_car;
 
